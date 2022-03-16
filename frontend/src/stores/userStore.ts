@@ -22,5 +22,11 @@ export const UserStore = defineStore({
         .then((user) => (this.loggedInUser = user))
         .catch((err) => console.log(err));
     },
+    loginUser(email: string, password: string){
+      userService
+        .loginUser(email,password)
+        .then((user) => (this.loggedInUser = user))
+        .catch((err) => console.log(err));
+    }
   },
 });
