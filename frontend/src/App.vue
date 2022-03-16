@@ -7,6 +7,7 @@ const items = [
   { to: "/", label: "Home", icon: "pi pi-fw pi-home" },
   { to: "/login", label: "Login", icon: "pi pi-fw pi-user" },
   { to: "/chat", label: "Chats", icon: "pi pi-fw pi-book" },
+  { to: "/friends", label: "Friends" },
 ];
 </script>
 
