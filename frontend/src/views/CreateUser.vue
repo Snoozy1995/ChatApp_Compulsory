@@ -1,29 +1,23 @@
 <template>
-  <h2>Create user</h2>
-  <input v-model="userName">
-  <button @click="createUser">Create</button>
-  <p>{{ output }}</p>
+  <h2>Let's create a user:</h2>
+  <input v-model="inputName" placeholder="Enter name" /> <br />
+  <input v-model="inputEmail" placeholder="Enter email" /><br />
+  <input v-model="inputPassword" placeholder="Enter password" /><br />
+  <button @click="handleCreateUser">Create</button>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { UserService } from '../services/user.service.ts'
+<script setup lang="ts">
+import { UserStore } from "../stores/userStore";
+import { ref } from "vue";
 
-const userName = ref('')
-const output = ref('')
+const userStore = UserStore();
+const inputName = ref("");
+const inputEmail = ref("");
+const inputPassword = ref("");
 
-function createUser () {
-  console.log('Create user')
-  UserService.create({ name: userName.value }).then(response => {
-    console.log(response.data)
-    output.value = response.data.name
-  }).catch(e => {
-    console.log(e)
-  })
+function handleCreateUser() {
+  userStore.createUser(inputName.value, inputEmail.value, inputPassword.value);
 }
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

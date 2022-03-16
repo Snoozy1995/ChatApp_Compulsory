@@ -1,20 +1,19 @@
-<template>
-  <p>HEADER</p>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/createUser">Create User</router-link> |
-    <router-link to="/chat">Chat</router-link>
-  </div>
-  <router-view/>
-  <p>FOOTER</p>
-</template>
+<script setup lang="ts">
+import { RouterLink, RouterView } from "vue-router";
+import { UserStore } from "@/stores/userStore";
 
-<script setup>
-
-import { provide } from 'vue'
-import { ChatService } from '@/services/chat.service'
-
-provide('ChatService', new ChatService())
-
+const userStore = UserStore();
 </script>
+
+<template>
+  <nav>
+    <RouterLink to="/">Home</RouterLink> |
+    <RouterLink to="/createUser">Create User</RouterLink> |
+    <RouterLink to="/chat">Chat</RouterLink>
+    <span v-if="userStore.userName.length > 0">
+      | Logged in as: {{ userStore.userName }}</span
+    >
+  </nav>
+  <br />
+  <RouterView />
+</template>

@@ -1,12 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import VueSocketIO from 'vue-3-socket.io'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 
-const vue = createApp(App)
-// vue.use(new VueSocketIO({
-//   debug: true,
-//   connection: 'http://localhost:3000'
-// }))
-vue.use(router)
-vue.mount('#app')
+import App from "./App.vue";
+import router from "./router";
+
+const app = createApp(App);
+
+app.use(createPinia());
+app.use(router);
+
+app.mount("#app");
