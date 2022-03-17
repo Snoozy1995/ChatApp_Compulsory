@@ -15,11 +15,13 @@
         </div>
       </div>
       <div class="mt-3 lg:mt-0">
-        <Button
-          label="Add friend"
-          class="p-button-outlined mr-2"
-          icon="pi pi-user-plus"
-        ></Button>
+        <router-link to="/friends/add">
+          <Button
+            label="Add friend"
+            class="p-button-outlined mr-2"
+            icon="pi pi-user-plus"
+          ></Button>
+        </router-link>
       </div>
     </div>
   </div>
