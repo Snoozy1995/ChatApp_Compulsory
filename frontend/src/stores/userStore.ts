@@ -17,16 +17,32 @@ export const UserStore = defineStore({
   },
   actions: {
     createUser(name: string, email: string, password: string) {
-      userService
-        .createUser(name, email, password)
-        .then((user) => (this.loggedInUser = user))
-        .catch((err) => console.log(err));
+      return new Promise((resolve, reject) => {
+        userService
+          .createUser(name, email, password)
+          .then((user) => {
+            this.loggedInUser = user;
+            resolve(true);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
     },
     loginUser(email: string, password: string){
-      userService
-        .loginUser(email,password)
-        .then((user) => (this.loggedInUser = user))
-        .catch((err) => console.log(err));
+      return new Promise((resolve, reject) => {
+        userService
+          .loginUser(email,password)
+          .then((user) => {
+            this.loggedInUser = user;
+            resolve(true);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
     },
     search(query: string){
       return userService.searchUsers(query);

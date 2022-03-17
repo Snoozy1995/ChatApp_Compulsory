@@ -14,12 +14,12 @@
         <label for="password1" class="block text-900 font-medium mb-2">Password</label>
         <InputText id="password1" v-model="inputPassword" type="password" class="w-full mb-3" />
 
-        <div class="flex align-items-center justify-content-between mb-6">
+        <!--<div class="flex align-items-center justify-content-between mb-6">
           <div class="flex align-items-center">
             <Checkbox id="rememberme1" :binary="true" v-model="checked" class="mr-2"></Checkbox>
             <label for="rememberme1">Remember me</label>
           </div>
-        </div>
+        </div>-->
 
         <Button label="Sign In" @click="handleLoginUser" icon="pi pi-user" class="w-full"></Button>
       </div>
@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import { UserStore } from "../stores/userStore";
 import { ref } from "vue";
+import router from "@/router";
 
 const userStore = UserStore();
 const inputEmail = ref("");
@@ -37,7 +38,9 @@ const inputPassword = ref("");
 const checked = ref(false);
 
 function handleLoginUser() {
-  userStore.loginUser(inputEmail.value, inputPassword.value);
+  userStore.loginUser(inputEmail.value, inputPassword.value).then((res) => {
+    router.push("/");
+  });
 }
 
 </script>
