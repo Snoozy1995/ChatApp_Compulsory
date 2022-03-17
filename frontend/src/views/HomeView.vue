@@ -1,7 +1,8 @@
 <template>
   <h1>Hello your home</h1>
   <div class="grid">
-    <div class="col-12 md:col-4 lg:col-3"><h5>Default</h5>
+    <div class="col-12 md:col-4 lg:col-3">
+      <h5>Default</h5>
       <PanelMenu :model="items" />
     </div>
     <div class="col-12 md:col-8 lg:col-9"></div>

@@ -30,10 +30,10 @@ export const UserStore = defineStore({
           });
       });
     },
-    loginUser(email: string, password: string){
+    loginUser(email: string, password: string) {
       return new Promise((resolve, reject) => {
         userService
-          .loginUser(email,password)
+          .loginUser(email, password)
           .then((user) => {
             this.loggedInUser = user;
             resolve(true);
@@ -44,8 +44,8 @@ export const UserStore = defineStore({
           });
       });
     },
-    search(query: string){
+    search(query: string) {
       return userService.searchUsers(query);
-    }
+    },
   },
 });

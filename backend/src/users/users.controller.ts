@@ -28,4 +28,9 @@ export class UsersController {
   searchUsers(@Body() search: { query: string }): Promise<User[]> {
     return this.usersService.searchByUsername(search.query);
   }
+
+  @Post('/friend')
+  addFriend(@Body() ids: {sender_uuid: string, receiver_uuid: string}):Promise<User>{
+    return this.usersService.addFriend(ids.sender_uuid,ids.receiver_uuid);
+  }
 }

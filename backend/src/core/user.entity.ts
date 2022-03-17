@@ -1,4 +1,5 @@
-import { JoinTable, ManyToMany } from "typeorm";
+import { OneToMany } from "typeorm";
+import { FriendRequestEntity } from "./friendRequest.entity";
 
 export class User {
   uuid: string;
@@ -6,10 +7,16 @@ export class User {
   email: string;
   password: string;
   friends:User[];
-  @ManyToMany(type => User, user => user.following)
-  @JoinTable()
-  followers: User[];
 
-  @ManyToMany(type => User, user => user.followers)
-  following: User[];
+  @OneToMany(
+    () => FriendRequestEntity,
+    (friendRequestEntity) => friendRequestEntity.creator,
+  )
+  sentFriendRequests: FriendRequestEntity[];
+
+  @OneToMany(
+    () => FriendRequestEntity,
+    (friendRequestEntity) => friendRequestEntity.receiver,
+  )
+  receivedFriendRequests: FriendRequestEntity[];
 }

@@ -15,7 +15,7 @@ const router = createRouter({
       component: HomeView,
       meta: {
         requiresLogin: true,
-      }
+      },
     },
     {
       path: "/chat",
@@ -23,7 +23,7 @@ const router = createRouter({
       component: ChatView,
       meta: {
         requiresLogin: true,
-      }
+      },
     },
     {
       path: "/createUser",
@@ -41,7 +41,7 @@ const router = createRouter({
       component: FriendsView,
       meta: {
         requiresLogin: true,
-      }
+      },
     },
     {
       path: "/friends/add",
@@ -49,23 +49,21 @@ const router = createRouter({
       component: FriendsAddView,
       meta: {
         requiresLogin: true,
-      }
+      },
     },
   ],
 });
 
 import { UserStore } from "../stores/userStore";
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresLogin)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
+  if (to.matched.some((record) => record.meta.requiresLogin)) {
     if (UserStore().userName.length <= 0) {
-      next({ name: 'Login' })
+      next({ name: "Login" });
     } else {
-      next() // go to wherever I'm going
+      next();
     }
   } else {
-    next() // does not require auth, make sure to always call next()!
+    next();
   }
 });
 

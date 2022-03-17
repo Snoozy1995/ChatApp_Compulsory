@@ -11,6 +11,17 @@ export class UserRepositoryAdapter implements IUserRepository {
   constructor(private readonly em: EntityManager) {
     this.userRepo = em.getRepository(UserSchema);
   }
+
+  addFriend(sender_uuid: string,receiver_uuid: string):Promise<User>{
+    let promise=this.userRepo.findOne(sender_uuid);
+    promise.then(sender=>{
+      this.userRepo.findOne(receiver_uuid).then(receiver=>{
+        sender.friends.push(receiver);
+      });
+    });
+    return promise;
+  }
+
   searchByUsername(query: string): Promise<User[]> {
     return this.userRepo.find({
         name: Like(`%${query}%`)

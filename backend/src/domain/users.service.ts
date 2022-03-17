@@ -15,5 +15,9 @@ export class UsersService {
   searchByUsername(query: string): Promise<User[]> {
     return this.userRepository.searchByUsername(query);
   }
+
+  addFriend(sender_uuid: string,receiver_uuid: string):Promise<User>{
+    return this.userRepository.addFriend(sender_uuid,receiver_uuid);
+  }
   
 }
