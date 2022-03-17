@@ -24,7 +24,7 @@ export const UserSchema = new EntitySchema<User>({
   relations: {
     friends: {
       type: 'many-to-many',
-      target: User,
+      target: 'User',
       joinColumn: {
         name: 'uuid',
       },
