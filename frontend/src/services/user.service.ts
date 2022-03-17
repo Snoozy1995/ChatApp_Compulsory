@@ -21,4 +21,11 @@ export class UserService {
     });
     return res.data;
   }
+
+  async searchUsers(query: string): Promise<User[]>{
+    const res = await http.post<User[]>("/users/search", {
+      query: query,
+    });
+    return res.data;
+  }
 }

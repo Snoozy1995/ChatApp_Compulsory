@@ -24,8 +24,8 @@ export class UsersController {
     return this.usersService.login(loginUser.email, loginUser.password);
   }
 
-  @Get('/friends')
-  getFriends(@Body() email: string){
-    return this.usersService.getFriends(email);
+  @Post('/search')
+  searchUsers(@Body() search: { query: string }): Promise<User[]> {
+    return this.usersService.searchByUsername(search.query);
   }
 }

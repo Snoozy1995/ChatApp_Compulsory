@@ -12,7 +12,8 @@ export class UsersService {
     return this.userRepository.getUser(email, password);
   }
 
-  getFriends(email: string): Promise<User[]> {
-    return this.userRepository.getFriends(email);
+  searchByUsername(query: string): Promise<User[]> {
+    return this.userRepository.searchByUsername(query);
   }
+  
 }

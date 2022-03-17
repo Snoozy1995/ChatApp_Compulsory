@@ -27,6 +27,9 @@ export const UserStore = defineStore({
         .loginUser(email,password)
         .then((user) => (this.loggedInUser = user))
         .catch((err) => console.log(err));
+    },
+    search(query: string){
+      return userService.searchUsers(query);
     }
   },
 });

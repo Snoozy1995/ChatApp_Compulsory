@@ -39,6 +39,7 @@ const checked = ref(false);
 function handleLoginUser() {
   userStore.loginUser(inputEmail.value, inputPassword.value);
 }
+
 </script>
 
 <style scoped></style>
