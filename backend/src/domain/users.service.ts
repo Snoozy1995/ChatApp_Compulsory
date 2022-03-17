@@ -11,4 +11,8 @@ export class UsersService {
   login(email: string, password: string) {
     return this.userRepository.getUser(email, password);
   }
+
+  getFriends(email: string): Promise<User[]> {
+    return this.userRepository.getFriends(email);
+  }
 }

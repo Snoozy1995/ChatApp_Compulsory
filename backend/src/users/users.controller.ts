@@ -23,4 +23,9 @@ export class UsersController {
   login(@Body() loginUser: LoginUserDto): Promise<User> {
     return this.usersService.login(loginUser.email, loginUser.password);
   }
+
+  @Get('/friends')
+  getFriends(@Body() email: string){
+    return this.usersService.getFriends(email);
+  }
 }

@@ -24,4 +24,10 @@ export class UserRepositoryAdapter implements IUserRepository {
       },
     });
   }
+
+  getFriends(email: string): Promise<User[]>{
+    return this.userRepo.find({
+      //@todo
+    });
+  }
 }
