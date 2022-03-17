@@ -12,12 +12,9 @@ const items = [
 </script>
 
 <template>
-  <Menubar :model="items" style="margin-bottom:50px">
-    <template #end>
-      <span v-if="userStore.userName.length > 0">
-        Logged in as: {{ userStore.userName }}
-      </span>
-    </template>
-  </Menubar>
+  <TabMenu :model="items" />
+  <span v-if="userStore.userName.length > 0">
+    Logged in as: {{ userStore.userName }}
+  </span>
   <RouterView />
 </template>
