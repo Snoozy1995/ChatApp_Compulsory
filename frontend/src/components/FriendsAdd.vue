@@ -1,13 +1,8 @@
 <template>
 
-  <div class="surface-section px-4 py-5 md:px-6 lg:px-8">
-    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
-      <label for="search1" class="block text-900 font-medium mb-2">Search users</label>
-      <InputText id="search1" v-model="inputQuery" type="text" class="w-full mb-3" v-on:input="searchHandler" />
-    </div>
-  </div>
+  <InputText id="search1" v-model="inputQuery" placeholder="Search users" type="text" class="w-full mb-3" v-on:input="searchHandler" />
   Results:
-  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4">
+  <div class="surface-card p-4 shadow-2 border-round w-full">
     <ul>
       <li v-for="(chat, index) in results" v-bind:key="index">
         <div class="grid">

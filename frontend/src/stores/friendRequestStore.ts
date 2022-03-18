@@ -11,8 +11,14 @@ export const FriendRequestStore = defineStore({
     sendFriendRequest(sender: User,receiver: User) {
       return friendRequestService.sendFriendRequest(sender,receiver);
     },
-    getFriends(user: User){
-      return friendRequestService.getFriends(user);
+    getFriends(id: string){
+      return friendRequestService.getFriends(id);
+    },
+    getSentRequestsPending(id: string){
+      return friendRequestService.getSentRequestsPending(id);
+    },
+    getReceivedRequestsPending(id: string){
+      return friendRequestService.getReceivedRequestsPending(id);
     }
   },
 });

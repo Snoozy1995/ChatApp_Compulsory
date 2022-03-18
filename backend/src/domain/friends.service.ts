@@ -9,8 +9,16 @@ export class FriendsService {
     return this.friendsRepository.sendFriendRequest(sender_uuid,receiver_uuid);
   }
 
-  getFriendRequests(user: User): Promise<Friend[]>{
-    return this.friendsRepository.getFriendRequests(user);
+  getFriends(id: string): Promise<User[]>{
+    return this.friendsRepository.getFriends(id);
+  }
+
+  getSentRequestsPending(id: string): Promise<Friend[]> {
+    return this.friendsRepository.getSentRequestsPending(id);
+  }
+
+  getReceivedRequestsPending(id: any): Promise<Friend[]> {
+    return this.friendsRepository.getReceivedRequestsPending(id);
   }
   
 }
