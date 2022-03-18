@@ -20,5 +20,9 @@ export class FriendsService {
   getReceivedRequestsPending(id: any): Promise<Friend[]> {
     return this.friendsRepository.getReceivedRequestsPending(id);
   }
+
+  removeFriend(creator: User, receiver: User){
+    return this.friendsRepository.removeFriend(creator,receiver);
+  }
   
 }

@@ -1,24 +1,41 @@
 import { FriendRequestService } from "@/services/friendRequest.service";
 import { defineStore } from "pinia";
 import type { User } from "@/models/User";
+import type { FriendRequest } from "@/models/FriendRequest";
 
 const friendRequestService: FriendRequestService = new FriendRequestService();
 
 export const FriendRequestStore = defineStore({
   id: "friendRequestStore",
-  state: () => ({}),
+  state: () => ({
+    pendingSentRequests: [] as FriendRequest[],
+    pendingReceivedRequests: [] as FriendRequest[],
+    friends: [] as User[],
+  }),
   actions: {
-    sendFriendRequest(sender: User,receiver: User) {
-      return friendRequestService.sendFriendRequest(sender,receiver);
+    sendFriendRequest(sender: User, receiver: User) {
+      friendRequestService.sendFriendRequest(sender,receiver).then(()=>{
+        this.update(sender.uuid);
+      });
+    },
+    removeFriend(sender: User, receiver: User) {
+      friendRequestService.removeFriend(sender,receiver).then(()=>{
+        this.update(sender.uuid);
+      });
     },
     getFriends(id: string){
-      return friendRequestService.getFriends(id);
+      friendRequestService
+        .getFriends(id)
+        .then((friends) => (this.friends = friends));
     },
-    getSentRequestsPending(id: string){
-      return friendRequestService.getSentRequestsPending(id);
+    update(id: string){
+      this.getFriends(id);
+      friendRequestService.getSentRequestsPending(id).then((requests) => {
+        this.pendingSentRequests = requests;
+      });
+      friendRequestService.getReceivedRequestsPending(id).then((requests) => {
+        this.pendingReceivedRequests = requests;
+      });
     },
-    getReceivedRequestsPending(id: string){
-      return friendRequestService.getReceivedRequestsPending(id);
-    }
   },
 });

@@ -6,6 +6,7 @@ export interface IFriendRepository {
   getSentRequestsPending(id: string): Promise<Friend[]>;
 
   sendFriendRequest(sender: User, receiver: User): Promise<Friend>;
+  removeFriend(creator: User, receiver: User);
 
   getFriends(id: string): Promise<User[]>;
 

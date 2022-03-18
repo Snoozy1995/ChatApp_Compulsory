@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Friend } from 'src/core/friend.entity';
-import { User } from 'src/core/user.entity';
 import { IFriendRepository } from 'src/domain/borders/friendRepository.interface';
 import { FriendsService } from 'src/domain/friends.service';
 import { FriendSchema } from 'src/infrastructure/typeORM/friend.schema';

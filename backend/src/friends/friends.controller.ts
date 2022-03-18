@@ -12,6 +12,11 @@ export class FriendsController {
     return this.friendsService.addFriend(friendRequest.creator,friendRequest.receiver);
   }
 
+  @Post("/remove")
+  removeFriend(@Body() friendRequest: Friend):Promise<Friend>{
+    return this.friendsService.removeFriend(friendRequest.creator,friendRequest.receiver);
+  }
+
   @Get(":id")
   getFriends(@Param('id') id):Promise<User[]>{
     return this.friendsService.getFriends(id);

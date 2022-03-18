@@ -11,19 +11,19 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: ChatView,
       meta: {
         requiresLogin: true,
       },
     },
-    {
+    /*{
       path: "/chat",
       name: "Chat",
       component: ChatView,
       meta: {
         requiresLogin: true,
       },
-    },
+    },*/
     {
       path: "/createUser",
       name: "CreateUser",

@@ -48,18 +48,36 @@ export class FriendRepositoryAdapter implements IFriendRepository {
 
       relations: ['receiver', 'creator']
     });
-    console.log(res);
     if(res){ 
       if(res.status==-1){
         //already handled..
         return;
       }else{
-        res.status=1;
-        return this.friendRequestRepo.save(res);
+        if(res.receiver.uuid==creator.uuid){
+          res.status=1;
+          return this.friendRequestRepo.save(res);
+        }
+        return;
       }
     }else{
       return this.friendRequestRepo.save(obj);
     }
+  }
+
+  async removeFriend(creator: User, receiver: User){
+    let res=await this.friendRequestRepo.findOne({
+      where:[{
+        creator: {uuid:creator.uuid},
+        receiver: {uuid:receiver.uuid},
+      },{
+        receiver: {uuid:creator.uuid},
+        creator:{uuid:receiver.uuid}
+      }],
+
+      relations: ['receiver', 'creator']
+    });
+    if(!res) return;
+    this.friendRequestRepo.remove(res);
   }
 
   getFriends(id: string): Promise<User[]> {

@@ -23,4 +23,12 @@ export class FriendRequestService {
     const res = await http.get("/friends/" + id);
     return res.data;
   }
+
+  async removeFriend(sender: User, receiver: User) {
+    const res = await http.post("/friends/remove", {
+      creator: sender,
+      receiver:receiver,
+    });
+    return res.data;
+  }
 }
