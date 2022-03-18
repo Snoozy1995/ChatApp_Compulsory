@@ -12,7 +12,7 @@
         <InputText id="email1" v-model="inputEmail" type="text" class="w-full mb-3" />
 
         <label for="password1" class="block text-900 font-medium mb-2">Password</label>
-        <InputText id="password1" v-model="inputPassword" type="password" class="w-full mb-3" />
+        <InputText id="password1" v-model="inputPassword" type="password" class="w-full mb-3" v-on:keyup.enter="handleLoginUser" />
 
         <!--<div class="flex align-items-center justify-content-between mb-6">
           <div class="flex align-items-center">

@@ -15,10 +15,14 @@
     <h2>All chats:</h2>
     <input v-model="txtRoomListener" placeholder="Enter room name" /> <br />
     <button @click="listenToRoom">Connect</button>-->
-    <ul>
-      <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
-        {{ chat.user.name }}: {{ chat.text }}
-        <Divider></Divider>
+    <ul style="list-style-type: none; padding: 0px">
+      <li
+        style="font-size: 14px; line-height: 14px"
+        v-for="(chat, index) in chatStore.chats"
+        v-bind:key="index"
+      >
+        <Tag style="font-size:10px" rounded severity="info" v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"></Tag> {{ chat.user.name }}: {{ chat.text }}
+        <Divider style="margin: 5px"></Divider>
       </li>
     </ul>
     <div v-if="chatStore.somebodyTyping">Somebody is typing...</div>
@@ -36,6 +40,7 @@
 </template>
 
 <script setup lang="ts">
+import Tag from 'primevue/tag';
 import { ChatStore } from "@/stores/chatStore";
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";

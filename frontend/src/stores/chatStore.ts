@@ -39,7 +39,7 @@ export const ChatStore = defineStore({
     },
     sendMessage(text: string){
       if (!this.room||!this.user) return;
-      chatService.createChat({ text: text, room: this.room, user:this.user });
+      chatService.createChat({ text: text, room: this.room, user:this.user,timestamp:Date.now() });
     },
     setTyping(bool: boolean,user: User){
       if(!this.room) return;

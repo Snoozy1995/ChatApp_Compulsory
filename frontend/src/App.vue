@@ -13,7 +13,7 @@ const items = [
 
 <template>
   <div v-if="userStore.userName.length > 0" style="padding-bottom:20px;">
-    <TabMenu :model="items" />
+    <TabMenu :model="items"></TabMenu>
     <span> Logged in as: {{ userStore.userName }} </span>
   </div>
   <RouterView />
