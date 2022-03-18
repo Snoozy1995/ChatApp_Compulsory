@@ -45,4 +45,9 @@ export class ChatsGateway {
   remove(@MessageBody() id: number) {
     return this.chatsService.remove(id);
   }
+
+  @SubscribeMessage('typing')
+  setTyping(@MessageBody() object){
+    this.server.emit("typing",object);
+  }
 }

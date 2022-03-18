@@ -11,6 +11,7 @@
       {{ chat.text }}
     </li>
   </ul>
+  <div v-if="chatStore.somebodyTyping">Somebody is typing...</div>
   <InputText
     id="text1"
     v-model="inputText"
@@ -19,31 +20,58 @@
     placeholder="Type chat message here..."
     style="position: absolute; bottom: 0px; left: 0px"
     v-on:keyup.enter="onEnter"
+    v-on:input="typingHandler"
   />
 </template>
 
 <script setup lang="ts">
 import { ChatStore } from "@/stores/chatStore";
+import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
 
 const inputText=ref("");
 
 const chatStore = ChatStore();
+const userStore = UserStore();
 const txtChatInput = ref("");
 const txtRoomInput = ref("");
 const txtRoomListener = ref("");
 
+var typing = false;
+var timeout: number | undefined = undefined;
+
+function timeoutFunction(){
+  typing = false;
+  chatStore.setTyping(false,userStore.loggedInUser);
+}
+
+function typingHandler(){
+  if(typing == false) {
+    typing = true;
+    chatStore.setTyping(true,userStore.loggedInUser);
+    timeout = setTimeout(timeoutFunction, 1000);
+  } else {
+    clearTimeout(timeout);
+    timeout = setTimeout(timeoutFunction, 1000);
+  }
+
+}
+
 function onEnter(){
+  if(!chatStore.room) return;
   chatStore.sendMessage(inputText.value);
+  inputText.value="";
 }
 
 function listenToRoom() {
-  chatStore.setRoom(txtRoomListener.value);
+  chatStore.setRoom(txtRoomListener.value,userStore.loggedInUser);
 }
 
 function sendChat() {
   chatStore.createChat({ text: txtChatInput.value, room: txtRoomInput.value });
 }
+
+chatStore.setRoom("default",userStore.loggedInUser);
 </script>
 
 <style scoped></style>

@@ -69,7 +69,7 @@ function handleCreateUser() {
   if (!inputName.value.length) return;
   if (
     !inputEmail.value.length ||
-    /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.value)
+    /^\w+([.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputEmail.value)
   )
     return;
   if (inputPassword.value.length < 4) return;
