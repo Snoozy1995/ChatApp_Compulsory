@@ -1,15 +1,18 @@
 <template>
-  <InputText
-    id="search1"
-    v-model="inputQuery"
-    placeholder="Search users"
-    type="text"
-    class="w-full mb-3"
-    v-on:input="searchHandler"
-  />
+  <span class="p-input-icon-left" style="margin-bottom:10px;width:100%;">
+    <i class="pi pi-search" />
+    <InputText
+      id="search1"
+      v-model="inputQuery"
+      placeholder="Search users"
+      type="text"
+      class="w-full"
+      v-on:input="searchHandler"
+    />
+  </span>
   <div v-if="results.length">
     Results:
-    <div class="surface-card p-4 shadow-2 border-round w-full">
+    <div class="surface-card p-4 shadow-2 border-round w-full" style="margin-top:10px;">
       <ul>
         <li v-for="(chat, index) in results" v-bind:key="index">
           <div class="grid">
