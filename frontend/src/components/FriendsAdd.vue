@@ -57,9 +57,7 @@ function searchHandler() {
 }
 
 function addFriend(uuid: User){
-  friendRequestStore
-    .sendFriendRequest(userStore.loggedInUser, uuid)
-    .catch((err) => console.log(err));
+  friendRequestStore.sendFriendRequest(userStore.loggedInUser, uuid);
 }
 </script>
 

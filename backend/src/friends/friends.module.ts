@@ -6,11 +6,12 @@ import { FriendSchema } from 'src/infrastructure/typeORM/friend.schema';
 import { FriendRepositoryAdapter } from 'src/infrastructure/typeORM/friendRepository.adapter';
 import { UserSchema } from 'src/infrastructure/typeORM/user.schema';
 import { FriendsController } from './friends.controller';
+import { FriendsGateway } from './friends.gateway';
 
 @Module({
   imports: [TypeOrmModule.forFeature([FriendSchema,UserSchema])],
   controllers: [FriendsController],
-  providers: [
+  providers: [FriendsService,FriendsGateway,
     {
       provide: 'FriendRepository',
       useClass: FriendRepositoryAdapter,

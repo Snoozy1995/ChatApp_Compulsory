@@ -89,6 +89,7 @@ const friendRequestStore = FriendRequestStore();
 const userStore = UserStore();
 
 friendRequestStore.update(userStore.loggedInUser.uuid);
+friendRequestStore.listenForFriends(userStore.loggedInUser);
 
 function addFriend(user: User) {
   friendRequestStore.sendFriendRequest(userStore.loggedInUser, user);

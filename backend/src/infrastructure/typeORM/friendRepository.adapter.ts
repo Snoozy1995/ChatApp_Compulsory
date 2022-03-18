@@ -55,9 +55,9 @@ export class FriendRepositoryAdapter implements IFriendRepository {
       }else{
         if(res.receiver.uuid==creator.uuid){
           res.status=1;
-          return this.friendRequestRepo.save(res);
+          this.friendRequestRepo.save(res);
         }
-        return;
+        return res;
       }
     }else{
       return this.friendRequestRepo.save(obj);
@@ -77,7 +77,9 @@ export class FriendRepositoryAdapter implements IFriendRepository {
       relations: ['receiver', 'creator']
     });
     if(!res) return;
+    res.status=-1;
     this.friendRequestRepo.remove(res);
+    return res;
   }
 
   getFriends(id: string): Promise<User[]> {

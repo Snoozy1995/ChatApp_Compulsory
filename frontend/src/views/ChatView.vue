@@ -50,9 +50,7 @@ const userStore = UserStore();
 //const txtRoomInput = ref("");
 //const txtRoomListener = ref("");
 chatStore.$subscribe((obj,state) => {
-  if (obj.events.key == "room") {
-    items[0].label = "Room: "+state.room;
-  }
+  items[0].label = "Room: "+state.room;
 });
 
 let items = [{ label: "", command: leaveRoom }];
