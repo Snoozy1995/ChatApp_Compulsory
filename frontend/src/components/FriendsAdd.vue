@@ -29,6 +29,10 @@ const friendRequestStore = FriendRequestStore();
 const results = ref();
 
 function searchHandler() {
+  if (inputQuery.value == "") {
+    results.value=[];
+    return;
+  }
   userStore.search(inputQuery.value).then((res)=>{
     console.log(res);
     results.value=res;
