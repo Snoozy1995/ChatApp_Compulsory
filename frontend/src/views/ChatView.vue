@@ -1,36 +1,47 @@
 <template>
-  <!--<h2>Send chat</h2>
-  <input v-model="txtChatInput" placeholder="Enter chat" /> <br />
-  <input v-model="txtRoomInput" placeholder="Enter room" /> <br />
-  <button @click="sendChat">Send</button>-->
-  <h2>All chats:</h2>
-  <input v-model="txtRoomListener" placeholder="Enter room name" /> <br />
-  <button @click="listenToRoom">Connect</button>
-  <ul>
-    <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
-      {{ chat.user.name }}: {{ chat.text }}
-      <Divider></Divider>
-    </li>
-  </ul>
-  <div v-if="chatStore.somebodyTyping">Somebody is typing...</div>
-  <InputText
-    id="text1"
-    v-model="inputText"
-    type="text"
-    class="w-full"
-    placeholder="Type chat message here and press enter to send..."
-    style="position: absolute; bottom: 0px; left: 0px"
-    v-on:keyup.enter="onEnter"
-    v-on:input="typingHandler"
-  />
+  <div v-if="!chatStore.room"><select-room></select-room></div>
+  <div v-if="chatStore.room">
+    In room: {{ chatStore.room
+    }}<Button
+      icon="pi pi-plus"
+      @click="leaveRoom"
+      class="p-button-text p-button-sm"
+      >Leave room</Button
+    >
+    <!--<h2>Send chat</h2>
+    <input v-model="txtChatInput" placeholder="Enter chat" /> <br />
+    <input v-model="txtRoomInput" placeholder="Enter room" /> <br />
+    <button @click="sendChat">Send</button>
+    <h2>All chats:</h2>
+    <input v-model="txtRoomListener" placeholder="Enter room name" /> <br />
+    <button @click="listenToRoom">Connect</button>-->
+    <ul>
+      <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
+        {{ chat.user.name }}: {{ chat.text }}
+        <Divider></Divider>
+      </li>
+    </ul>
+    <div v-if="chatStore.somebodyTyping">Somebody is typing...</div>
+    <InputText
+      id="text1"
+      v-model="inputText"
+      type="text"
+      class="w-full"
+      placeholder="Type chat message here and press enter to send..."
+      style="position: absolute; bottom: 0px; left: 0px"
+      v-on:keyup.enter="onEnter"
+      v-on:input="typingHandler"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ChatStore } from "@/stores/chatStore";
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
+import SelectRoom from "../components/SelectRoom.vue";
 
-const inputText=ref("");
+const inputText = ref("");
 
 const chatStore = ChatStore();
 const userStore = UserStore();
@@ -41,31 +52,35 @@ const txtRoomListener = ref("");
 var typing = false;
 var timeout: number | undefined = undefined;
 
-function timeoutFunction(){
-  typing = false;
-  chatStore.setTyping(false,userStore.loggedInUser);
+function leaveRoom() {
+  chatStore.setRoom("", userStore.loggedInUser);
 }
 
-function typingHandler(){
-  if(typing == false) {
+function timeoutFunction() {
+  typing = false;
+  chatStore.setTyping(false, userStore.loggedInUser);
+}
+
+function typingHandler() {
+  if (typing == false) {
     typing = true;
-    chatStore.setTyping(true,userStore.loggedInUser);
+    chatStore.setTyping(true, userStore.loggedInUser);
     timeout = setTimeout(timeoutFunction, 1000);
   } else {
     clearTimeout(timeout);
     timeout = setTimeout(timeoutFunction, 1000);
   }
-
 }
 
-function onEnter(){
-  if(!chatStore.room) return;
+function onEnter() {
+  if (!chatStore.room) return;
   chatStore.sendMessage(inputText.value);
-  inputText.value="";
+  inputText.value = "";
 }
+/*
 
 function listenToRoom() {
-  chatStore.setRoom(txtRoomListener.value,userStore.loggedInUser);
+  chatStore.setRoom(txtRoomListener.value, userStore.loggedInUser);
 }
 
 function sendChat() {
@@ -74,9 +89,9 @@ function sendChat() {
     room: txtRoomInput.value,
     user: userStore.loggedInUser,
   });
-}
+}*/
 
-chatStore.setRoom("default",userStore.loggedInUser);
+//chatStore.setRoom("default",userStore.loggedInUser);
 </script>
 
 <style scoped></style>

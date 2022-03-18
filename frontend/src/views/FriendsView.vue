@@ -61,6 +61,7 @@ import { ref } from "vue";
 
 import { FriendRequestStore } from "../stores/friendRequestStore";
 import type { User } from '@/models/User';
+import FriendsAdd from '../components/FriendsAdd.vue';
 const friendRequestStore = FriendRequestStore();
 const userStore = UserStore();
 
