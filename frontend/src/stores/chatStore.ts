@@ -31,8 +31,6 @@ export const ChatStore = defineStore({
         },
         (typingObj) => {
           if(this.room!=typingObj.room) return;
-          console.log(this.user);
-          console.log(typingObj.user);
           if (this.user.uuid == typingObj.user.uuid) return;
           this.somebodyTyping = typingObj.typing;
       });

@@ -16,7 +16,6 @@ export const FriendRequestStore = defineStore({
     listenForFriends(user: User){
       friendRequestService.listenForFriends((friend)=>{
         if (friend.status == 1 && friend.creator.uuid == user.uuid) {
-          console.log("WHAT");
           alert("Friend request accepted!");
         }
         if (

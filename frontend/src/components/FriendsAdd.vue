@@ -51,7 +51,6 @@ function searchHandler() {
     return;
   }
   userStore.search(inputQuery.value).then((res)=>{
-    console.log(res);
     results.value = res;
   });
 }

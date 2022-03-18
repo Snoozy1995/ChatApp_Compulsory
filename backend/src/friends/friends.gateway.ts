@@ -22,7 +22,6 @@ export class FriendsGateway {
 
   @SubscribeMessage('friendRequest')
   setTyping(@MessageBody() object : Friend){
-    console.log("Friend request");
     this.server.emit("friendRequest",object);
   }
 }
