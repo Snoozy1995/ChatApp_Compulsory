@@ -2,9 +2,9 @@ import { FriendRequestService } from "@/services/friendRequest.service";
 import { defineStore } from "pinia";
 import type { User } from "@/models/User";
 import type { FriendRequest } from "@/models/FriendRequest";
+import Push from "push.js";
 
 const friendRequestService: FriendRequestService = new FriendRequestService();
-
 export const FriendRequestStore = defineStore({
   id: "friendRequestStore",
   state: () => ({
@@ -16,7 +16,11 @@ export const FriendRequestStore = defineStore({
     listenForFriends(user: User){
       friendRequestService.listenForFriends((friend)=>{
         if (friend.status == 1 && friend.creator.uuid == user.uuid) {
-          alert("Friend request accepted!");
+          Push.create(
+            friend.receiver.name + " has accepted your friend request!"
+          );
+        } else if (friend.status == 0 && friend.receiver.uuid == user.uuid) {
+          Push.create(friend.creator.name + " has sent you a friend request!");
         }
         if (
           friend.receiver.uuid == user.uuid ||

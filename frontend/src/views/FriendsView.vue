@@ -10,10 +10,15 @@
               v-bind:key="index"
             >
               <div class="grid">
-                <div class="col-10" style="line-height: 40px; height: 40px">
+                <div class="col-9" style="line-height: 40px; height: 40px">
                   {{ request.creator.name }}
                 </div>
-                <div class="col-2" style="height: 40px">
+                <div class="col-3" style="height: 40px">
+                  <Button
+                    icon="pi pi-minus"
+                    @click="removeFriend(request.creator)"
+                    class="p-button-rounded p-button-warning p-button-icon-only p-button-text p-button-sm"
+                  ></Button>
                   <Button
                     icon="pi pi-plus"
                     @click="addFriend(request.creator)"

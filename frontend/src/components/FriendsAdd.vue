@@ -1,5 +1,4 @@
 <template>
-
   <InputText
     id="search1"
     v-model="inputQuery"
@@ -50,12 +49,23 @@ function searchHandler() {
     results.value = [];
     return;
   }
-  userStore.search(inputQuery.value).then((res)=>{
-    results.value = res;
+  userStore.search(inputQuery.value).then((res) => {
+    results.value = res.filter((obj) => {
+      if (obj.uuid == userStore.loggedInUser.uuid) return false;
+      return (
+        !friendRequestStore.friends.some((item) => item.uuid == obj.uuid) &&
+        !friendRequestStore.pendingReceivedRequests.some(
+          (item) => item.creator.uuid == obj.uuid
+        ) &&
+        !friendRequestStore.pendingSentRequests.some(
+          (item) => item.receiver.uuid == obj.uuid
+        )
+      );
+    });
   });
 }
 
-function addFriend(uuid: User){
+function addFriend(uuid: User) {
   friendRequestStore.sendFriendRequest(userStore.loggedInUser, uuid);
 }
 </script>

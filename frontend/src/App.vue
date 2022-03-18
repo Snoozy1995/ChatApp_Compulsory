@@ -10,7 +10,6 @@ const items = [
   { to: "/friends", label: "Friends" },
 ];
 </script>
-
 <template>
   <div v-if="userStore.userName.length > 0" style="padding-bottom:20px;">
     <TabMenu :model="items"></TabMenu>
