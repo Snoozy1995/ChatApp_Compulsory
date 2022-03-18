@@ -64,8 +64,15 @@
               v-bind:key="index"
             >
               <div class="grid">
-                <div class="col-12" style="line-height: 40px; height: 40px">
+                <div class="col-10" style="line-height: 40px; height: 40px">
                   {{ friend.name }}
+                </div>
+                <div class="col-2" style="height: 40px">
+                  <Button
+                    icon="pi pi-minus"
+                    @click="removeFriend(friend)"
+                    class="p-button-rounded p-button-warning p-button-icon-only p-button-text p-button-sm"
+                  ></Button>
                 </div>
               </div>
               <Divider />
@@ -92,9 +99,7 @@ import FriendsAdd from "../components/FriendsAdd.vue";
 const friendRequestStore = FriendRequestStore();
 const userStore = UserStore();
 
-friendRequestStore.getSentRequestsPending(userStore.loggedInUser.uuid);
-friendRequestStore.getReceivedRequestsPending(userStore.loggedInUser.uuid);
-friendRequestStore.getFriends(userStore.loggedInUser.uuid);
+friendRequestStore.update(userStore.loggedInUser.uuid);
 
 function addFriend(user: User) {
   friendRequestStore.sendFriendRequest(userStore.loggedInUser, user);
