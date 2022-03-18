@@ -20,7 +20,8 @@ export const FriendRequestStore = defineStore({
             friend.receiver.name + " has accepted your friend request!"
           );
         } else if (friend.status == 0 && friend.receiver.uuid == user.uuid) {
-          Push.create(friend.creator.name + " has sent you a friend request!");
+          Push.create(friend.creator.name + " has sent you a friend request!",{
+            body: "How's it hangin'?",});
         }
         if (
           friend.receiver.uuid == user.uuid ||
