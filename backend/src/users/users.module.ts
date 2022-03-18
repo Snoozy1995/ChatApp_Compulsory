@@ -5,6 +5,7 @@ import { UserRepositoryAdapter } from '../infrastructure/typeORM/userRepository.
 import { IUserRepository } from '../domain/borders/userRepository.interface';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserSchema } from '../infrastructure/typeORM/user.schema';
+import { User } from 'src/core/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserSchema])],

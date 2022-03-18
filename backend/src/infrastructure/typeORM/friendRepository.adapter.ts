@@ -14,7 +14,7 @@ export class FriendRepositoryAdapter implements IFriendRepository {
   }
   sendFriendRequest(creator: User, receiver: User): Promise<Friend> {
     //@todo check if already exists etc..
-    let obj:Friend={
+    let obj={
       creator, receiver, status:0
     }
     return this.friendRequestRepo.save(obj);
@@ -22,7 +22,7 @@ export class FriendRepositoryAdapter implements IFriendRepository {
 
   //Not really sure if this is even necessary.
   getFriendRequests(user: User): Promise<Friend[]> {
-    return this.friendRequestRepo.find({});
+    return this.friendRequestRepo.find({relations: ['creator', 'receiver']});
     return this.friendRequestRepo.createQueryBuilder().relation(Friend,"creator").of(user).loadMany();
     return this.friendRequestRepo.find({
       where:[{

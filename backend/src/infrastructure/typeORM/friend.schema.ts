@@ -13,12 +13,6 @@ export const FriendSchema = new EntitySchema<Friend>({
     status: {
       type: 'int'
     },
-    receiver:{
-      type:'varchar',
-    },
-    creator:{
-      type:'varchar'
-    }
   },
   relations: {
     creator: {
