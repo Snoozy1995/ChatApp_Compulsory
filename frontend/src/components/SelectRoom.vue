@@ -6,7 +6,7 @@
         v-model="inputQuery"
         placeholder="Type room name to join and press enter..."
         type="text"
-        class="w-full mb-3"
+        class="w-full mb-3 p-inputtext-lg"
         v-on:keyup.enter="onEnter"
       />
     </div>

@@ -2,7 +2,7 @@
   <div v-if="!chatStore.room"><select-room></select-room></div>
   <div v-if="chatStore.room">
     <Breadcrumb :home="home" :model="items" />
-    <div style="margin-bottom:45px;margin-top:10px;">
+    <div style="margin-bottom:60px;margin-top:10px;">
       <div v-if="chatStore.somebodyTyping" style="font-size:14px;font-weight:bold;text-align:center;">Somebody is typing...</div>
       <ul style="list-style-type: none; padding: 0px;margin-bottom:0px;">
         <li
@@ -25,7 +25,7 @@
       id="text1"
       v-model="inputText"
       type="text"
-      class="w-full"
+      class="w-full p-inputtext-lg"
       placeholder="Type chat message here and press enter to send..."
       style="position: fixed; bottom: 0px; left: 0px"
       v-on:keyup.enter="onEnter"
@@ -50,7 +50,7 @@ const userStore = UserStore();
 //const txtRoomInput = ref("");
 //const txtRoomListener = ref("");
 chatStore.$subscribe((obj,state) => {
-  items[0].label = "Room: "+state.room;
+  items[0].label = "Room: "+state.room+" (Leave room)";
 });
 
 let items = [{ label: "", command: leaveRoom }];
