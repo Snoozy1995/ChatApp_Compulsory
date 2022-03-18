@@ -4,7 +4,12 @@ import PrimeVue from "primevue/config";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 import Button from "primevue/button";
-import Menubar from 'primevue/menubar';
+import Menubar from "primevue/menubar";
+import TabMenu from "primevue/tabmenu";
+import PanelMenu from "primevue/panelmenu";
+import FriendsAdd from "./components/FriendsAdd.vue";
+import Divider from "primevue/divider";
+
 
 import App from "./App.vue";
 import router from "./router";
@@ -15,9 +20,14 @@ app.use(createPinia());
 app.use(router);
 app.use(PrimeVue);
 
-app.component("InputText",InputText);
-app.component("Checkbox",Checkbox);
-app.component("Button",Button);
-app.component("Menubar",Menubar);
+app.component("FriendsAdd", FriendsAdd);
+
+app.component("InputText", InputText);
+app.component("Checkbox", Checkbox);
+app.component("Button", Button);
+app.component("Menubar", Menubar);
+app.component("TabMenu", TabMenu);
+app.component("PanelMenu", PanelMenu);
+app.component("Divider",Divider);
 
 app.mount("#app");
