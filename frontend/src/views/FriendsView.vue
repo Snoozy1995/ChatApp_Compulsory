@@ -31,6 +31,12 @@
 import { UserStore } from "../stores/userStore";
 import { ref } from "vue";
 
+import { FriendRequestStore } from "../stores/friendRequestStore";
+const friendRequestStore = FriendRequestStore();
+const userStore = UserStore();
+friendRequestStore.getFriends(userStore.loggedInUser).then(val=>{
+console.log(val)
+})
 
 </script>
 

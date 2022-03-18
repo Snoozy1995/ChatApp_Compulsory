@@ -12,19 +12,19 @@ export class UserRepositoryAdapter implements IUserRepository {
     this.userRepo = em.getRepository(UserSchema);
   }
 
-  addFriend(sender_uuid: string,receiver_uuid: string):Promise<User>{
-    let promise=this.userRepo.findOne(sender_uuid);
-    promise.then(sender=>{
-      this.userRepo.findOne(receiver_uuid).then(receiver=>{
-        sender.friends.push(receiver);
-      });
-    });
-    return promise;
-  }
-
   searchByUsername(query: string): Promise<User[]> {
     return this.userRepo.find({
-        name: Like(`%${query}%`)
+      where:{
+        name: Like(`%${query}%`),
+      },select:['name','uuid']
+    });
+  }
+
+  searchByID(query: string): Promise<User> {
+    return this.userRepo.findOne({
+      where:{
+        uuid:query,
+      },select:['name','uuid'],
     });
   }
 

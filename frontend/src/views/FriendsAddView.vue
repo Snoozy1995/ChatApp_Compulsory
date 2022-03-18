@@ -7,20 +7,30 @@
     </div>
   </div>
   Results:
-  <ul>
-    <li v-for="(chat, index) in results" v-bind:key="index">
-      {{ chat.name }}
-    </li>
-  </ul>
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4">
+    <ul>
+      <li v-for="(chat, index) in results" v-bind:key="index">
+        <div class="grid">
+          <div class="col-10" style="line-height:40px; height:40px;">{{ chat.name }} </div>
+          <div class="col-2" style="height:40px;"><Button icon="pi pi-plus" @click="addFriend(chat)" class="p-button-rounded p-button-success p-button-icon-only p-button-text p-button-sm"></Button></div>
+        </div>
+        <Divider/>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { UserStore } from "../stores/userStore";
+import { FriendRequestStore } from "../stores/friendRequestStore";
 import { ref } from "vue";
+import Divider from 'primevue/divider';
+import type { User } from "@/models/User";
 
 const inputQuery=ref("");
 
 const userStore = UserStore();
+const friendRequestStore = FriendRequestStore();
 const results = ref();
 
 function searchHandler() {
@@ -28,6 +38,10 @@ function searchHandler() {
     console.log(res);
     results.value=res;
   });
+}
+
+function addFriend(uuid: User){
+  friendRequestStore.sendFriendRequest(userStore.loggedInUser,uuid).then((res)=>{ console.log(res); }).catch(err=>console.log(err));
 }
 </script>
 
