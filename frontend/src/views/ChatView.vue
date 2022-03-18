@@ -2,30 +2,32 @@
   <div v-if="!chatStore.room"><select-room></select-room></div>
   <div v-if="chatStore.room">
     <Breadcrumb :home="home" :model="items" />
-    <ul style="list-style-type: none; padding: 0px">
-      <li
-        style="font-size: 14px; line-height: 14px"
-        v-for="(chat, index) in chatStore.chats"
-        v-bind:key="index"
-      >
-        <Tag
-          style="font-size: 10px"
-          rounded
-          severity="info"
-          v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"
-        ></Tag>
-        {{ chat.user.name }}: {{ chat.text }}
-        <Divider style="margin: 5px"></Divider>
-      </li>
-    </ul>
-    <div v-if="chatStore.somebodyTyping">Somebody is typing...</div>
+    <div style="margin-bottom:45px;margin-top:10px;">
+      <div v-if="chatStore.somebodyTyping" style="font-size:14px;font-weight:bold;text-align:center;">Somebody is typing...</div>
+      <ul style="list-style-type: none; padding: 0px;margin-bottom:0px;">
+        <li
+          style="font-size: 14px; line-height: 14px"
+          v-for="(chat, index) in chatStore.chats"
+          v-bind:key="index"
+        >
+          <Tag
+            style="font-size: 10px"
+            rounded
+            severity="info"
+            v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"
+          ></Tag>
+          {{ chat.user.name }}: {{ chat.text }}
+          <Divider style="margin: 5px"></Divider>
+        </li>
+      </ul>
+    </div>
     <InputText
       id="text1"
       v-model="inputText"
       type="text"
       class="w-full"
       placeholder="Type chat message here and press enter to send..."
-      style="position: absolute; bottom: 0px; left: 0px"
+      style="position: fixed; bottom: 0px; left: 0px"
       v-on:keyup.enter="onEnter"
       v-on:input="typingHandler"
     />
@@ -47,12 +49,12 @@ const userStore = UserStore();
 //const txtChatInput = ref("");
 //const txtRoomInput = ref("");
 //const txtRoomListener = ref("");
-chatStore.$subscribe((obj) => {
-  console.log(obj);
+chatStore.$subscribe((obj,state) => {
   if (obj.events.key == "room") {
-    items[0].label = "Room: "+obj.events.newValue;
+    items[0].label = "Room: "+state.room;
   }
 });
+
 let items = [{ label: "", command: leaveRoom }];
 const home = { icon: "pi pi-home", command: leaveRoom };
 

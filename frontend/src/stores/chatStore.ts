@@ -27,7 +27,7 @@ export const ChatStore = defineStore({
       this.room = room;
       this.user=user;
       chatService.listenToRoom(room, (chat) => {
-        this.chats.push(chat);
+        this.chats.unshift(chat);
         },
         (typingObj) => {
           if(this.room!=typingObj.room) return;
