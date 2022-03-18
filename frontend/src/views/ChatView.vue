@@ -11,16 +11,31 @@
       {{ chat.text }}
     </li>
   </ul>
+  <InputText
+    id="text1"
+    v-model="inputText"
+    type="text"
+    class="w-full"
+    placeholder="Type chat message here..."
+    style="position: absolute; bottom: 0px; left: 0px"
+    v-on:keyup.enter="onEnter"
+  />
 </template>
 
 <script setup lang="ts">
 import { ChatStore } from "@/stores/chatStore";
 import { ref } from "vue";
 
+const inputText=ref("");
+
 const chatStore = ChatStore();
 const txtChatInput = ref("");
 const txtRoomInput = ref("");
 const txtRoomListener = ref("");
+
+function onEnter(){
+  chatStore.sendMessage(inputText.value);
+}
 
 function listenToRoom() {
   chatStore.setRoom(txtRoomListener.value);
