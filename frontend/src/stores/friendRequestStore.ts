@@ -8,7 +8,7 @@ export const FriendRequestStore = defineStore({
   id: "friendRequestStore",
   state: () => ({}),
   actions: {
-    sendFriendRequest(sender: User,receiver: User) {
+    sendFriendRequest(sender: User, receiver: User) {
       return friendRequestService.sendFriendRequest(sender,receiver);
     },
     getFriends(id: string){

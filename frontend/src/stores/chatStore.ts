@@ -26,9 +26,9 @@ export const ChatStore = defineStore({
       });
     },
     sendMessage(text: string){
-      if(!this.room) return;
+      if (!this.room) return;
       chatService.createChat({ text: text, room: this.room });
       this.chats.push({ text: text, room: this.room });
-    }
+    },
   },
 });
