@@ -1,27 +1,20 @@
 <template>
   <div v-if="!chatStore.room"><select-room></select-room></div>
   <div v-if="chatStore.room">
-    In room: {{ chatStore.room
-    }}<Button
-      icon="pi pi-plus"
-      @click="leaveRoom"
-      class="p-button-text p-button-sm"
-      >Leave room</Button
-    >
-    <!--<h2>Send chat</h2>
-    <input v-model="txtChatInput" placeholder="Enter chat" /> <br />
-    <input v-model="txtRoomInput" placeholder="Enter room" /> <br />
-    <button @click="sendChat">Send</button>
-    <h2>All chats:</h2>
-    <input v-model="txtRoomListener" placeholder="Enter room name" /> <br />
-    <button @click="listenToRoom">Connect</button>-->
+    <Breadcrumb :home="home" :model="items" />
     <ul style="list-style-type: none; padding: 0px">
       <li
         style="font-size: 14px; line-height: 14px"
         v-for="(chat, index) in chatStore.chats"
         v-bind:key="index"
       >
-        <Tag style="font-size:10px" rounded severity="info" v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"></Tag> {{ chat.user.name }}: {{ chat.text }}
+        <Tag
+          style="font-size: 10px"
+          rounded
+          severity="info"
+          v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"
+        ></Tag>
+        {{ chat.user.name }}: {{ chat.text }}
         <Divider style="margin: 5px"></Divider>
       </li>
     </ul>
@@ -40,7 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import Tag from 'primevue/tag';
+import Breadcrumb from "primevue/breadcrumb";
+import Tag from "primevue/tag";
 import { ChatStore } from "@/stores/chatStore";
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
@@ -50,9 +44,17 @@ const inputText = ref("");
 
 const chatStore = ChatStore();
 const userStore = UserStore();
-const txtChatInput = ref("");
-const txtRoomInput = ref("");
-const txtRoomListener = ref("");
+//const txtChatInput = ref("");
+//const txtRoomInput = ref("");
+//const txtRoomListener = ref("");
+chatStore.$subscribe((obj) => {
+  console.log(obj);
+  if (obj.events.key == "room") {
+    items[0].label = "Room: "+obj.events.newValue;
+  }
+});
+let items = [{ label: "", command: leaveRoom }];
+const home = { icon: "pi pi-home", command: leaveRoom };
 
 var typing = false;
 var timeout: number | undefined = undefined;
@@ -79,6 +81,10 @@ function typingHandler() {
 
 function onEnter() {
   if (!chatStore.room) return;
+  if(typing){
+    clearTimeout(timeout);
+    timeoutFunction();
+  }
   chatStore.sendMessage(inputText.value);
   inputText.value = "";
 }

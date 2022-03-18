@@ -8,25 +8,27 @@
     class="w-full mb-3"
     v-on:input="searchHandler"
   />
-  Results:
-  <div class="surface-card p-4 shadow-2 border-round w-full">
-    <ul>
-      <li v-for="(chat, index) in results" v-bind:key="index">
-        <div class="grid">
-          <div class="col-10" style="line-height: 40px; height: 40px">
-            {{ chat.name }}
+  <div v-if="results.length">
+    Results:
+    <div class="surface-card p-4 shadow-2 border-round w-full">
+      <ul>
+        <li v-for="(chat, index) in results" v-bind:key="index">
+          <div class="grid">
+            <div class="col-10" style="line-height: 40px; height: 40px">
+              {{ chat.name }}
+            </div>
+            <div class="col-2" style="height: 40px">
+              <Button
+                icon="pi pi-plus"
+                @click="addFriend(chat)"
+                class="p-button-rounded p-button-success p-button-icon-only p-button-text p-button-sm"
+              ></Button>
+            </div>
           </div>
-          <div class="col-2" style="height: 40px">
-            <Button
-              icon="pi pi-plus"
-              @click="addFriend(chat)"
-              class="p-button-rounded p-button-success p-button-icon-only p-button-text p-button-sm"
-            ></Button>
-          </div>
-        </div>
-        <Divider />
-      </li>
-    </ul>
+          <Divider />
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -41,7 +43,7 @@ const inputQuery = ref("");
 
 const userStore = UserStore();
 const friendRequestStore = FriendRequestStore();
-const results = ref();
+const results = ref([]);
 
 function searchHandler() {
   if (inputQuery.value == "") {

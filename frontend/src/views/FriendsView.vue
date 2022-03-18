@@ -2,16 +2,6 @@
   <div class="grid" style="padding: 50px">
     <div class="col-12 md:col-8 lg:col-8">
       <div class="font-medium text-3xl text-900">Friends</div>
-      <!--<div class="flex align-items-center text-700 flex-wrap">
-        <div class="mr-5 flex align-items-center mt-3">
-          <i class="pi pi-users mr-2"></i>
-          <span>332 friends online</span>
-        </div>
-        <div class="mr-5 flex align-items-center mt-3">
-          <i class="pi pi-globe mr-2"></i>
-          <span>9402 friend requests!</span>
-        </div>
-      </div>-->
       <Accordion style="margin-top: 25px" :multiple="true">
         <AccordionTab header="Friend requests pending action">
           <ul>
@@ -80,7 +70,6 @@
           </ul>
         </AccordionTab>
       </Accordion>
-      <Divider />
     </div>
     <div class="col-12 md:col-4 lg:col-4">
       <FriendsAdd></FriendsAdd>
