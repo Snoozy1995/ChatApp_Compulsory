@@ -1,14 +1,15 @@
 <template>
-  <h2>Send chat</h2>
+  <!--<h2>Send chat</h2>
   <input v-model="txtChatInput" placeholder="Enter chat" /> <br />
   <input v-model="txtRoomInput" placeholder="Enter room" /> <br />
-  <button @click="sendChat">Send</button>
+  <button @click="sendChat">Send</button>-->
   <h2>All chats:</h2>
   <input v-model="txtRoomListener" placeholder="Enter room name" /> <br />
   <button @click="listenToRoom">Connect</button>
   <ul>
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
-      {{ chat.text }}
+      {{ chat.user.name }}: {{ chat.text }}
+      <Divider></Divider>
     </li>
   </ul>
   <div v-if="chatStore.somebodyTyping">Somebody is typing...</div>
@@ -17,7 +18,7 @@
     v-model="inputText"
     type="text"
     class="w-full"
-    placeholder="Type chat message here..."
+    placeholder="Type chat message here and press enter to send..."
     style="position: absolute; bottom: 0px; left: 0px"
     v-on:keyup.enter="onEnter"
     v-on:input="typingHandler"
@@ -68,7 +69,11 @@ function listenToRoom() {
 }
 
 function sendChat() {
-  chatStore.createChat({ text: txtChatInput.value, room: txtRoomInput.value });
+  chatStore.createChat({
+    text: txtChatInput.value,
+    room: txtRoomInput.value,
+    user: userStore.loggedInUser,
+  });
 }
 
 chatStore.setRoom("default",userStore.loggedInUser);

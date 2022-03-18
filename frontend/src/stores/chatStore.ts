@@ -8,7 +8,7 @@ const chatService = new ChatService();
 export const ChatStore = defineStore({
   id: "ChatStore",
   state: () => ({
-    chats: [{ text: "First chat" }, { text: "Second chat" }] as Chat[],
+    chats: [] as Chat[],
     room: "",
     typing: false,
     somebodyTyping: false,
@@ -38,8 +38,8 @@ export const ChatStore = defineStore({
       });
     },
     sendMessage(text: string){
-      if (!this.room) return;
-      chatService.createChat({ text: text, room: this.room });
+      if (!this.room||!this.user) return;
+      chatService.createChat({ text: text, room: this.room, user:this.user });
     },
     setTyping(bool: boolean,user: User){
       if(!this.room) return;
