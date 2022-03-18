@@ -1,19 +1,12 @@
 import { io } from "socket.io-client";
 import type { Chat } from "@/models/Chat";
 import type { User } from "@/models/User";
+import socketHelper from "../helpers/socket.helper";
 
 export class ChatService {
-  socket = io("localhost:3001");
-
-  constructor() {
-    this.socket.connect();
-    this.socket.on("connect", () => {
-      console.log(this.socket.id);
-    });
-  }
 
   createChat(chat: Chat) {
-    this.socket.emit("createChat", chat);
+    socketHelper.socket.emit("createChat", chat);
   }
 
   listenToRoom(
@@ -21,20 +14,20 @@ export class ChatService {
     chatListener: (chat: Chat) => void,
     typingEvent: (typing: {typing:boolean,room: string,user: User}) => void
   ) {
-    this.socket.on(room, (chat: Chat) => {
+    socketHelper.socket.on(room, (chat: Chat) => {
       chatListener(chat);
     });
-    this.socket.on("typing",(typing)=>{
+    socketHelper.socket.on("typing",(typing)=>{
       typingEvent(typing);
     });
   }
 
   disconnectFromRoom(room: string) {
-    this.socket.off(room);
-    this.socket.off("typing");
+    socketHelper.socket.off(room);
+    socketHelper.socket.off("typing");
   }
 
   setTyping(typing: boolean, room: string, user: User) {
-    this.socket.emit("typing", { typing: typing, room: room, user: user });
+    socketHelper.socket.emit("typing", { typing: typing, room: room, user: user });
   }
 }

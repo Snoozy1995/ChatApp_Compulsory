@@ -9,7 +9,6 @@ import PanelMenu from "primevue/panelmenu";
 import Divider from "primevue/divider";
 import BadgeDirective from 'primevue/badgedirective';
 
-
 import App from "./App.vue";
 import router from "./router";
 

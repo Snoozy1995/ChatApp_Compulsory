@@ -13,6 +13,19 @@ export const FriendRequestStore = defineStore({
     friends: [] as User[],
   }),
   actions: {
+    listenForFriends(user: User){
+      friendRequestService.listenForFriends((friend)=>{
+        if (friend.status == 1 && friend.creator.uuid == user.uuid) {
+          alert("Friend request accepted!");
+        }
+        if (
+          friend.receiver.uuid == user.uuid ||
+          friend.creator.uuid == user.uuid
+        ) {
+          this.update(user.uuid);
+        }
+      });
+    },
     sendFriendRequest(sender: User, receiver: User) {
       friendRequestService.sendFriendRequest(sender,receiver).then(()=>{
         this.update(sender.uuid);

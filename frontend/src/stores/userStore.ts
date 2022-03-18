@@ -25,7 +25,6 @@ export const UserStore = defineStore({
             resolve(true);
           })
           .catch((err) => {
-            console.log(err);
             reject(err);
           });
       });
@@ -39,7 +38,6 @@ export const UserStore = defineStore({
             resolve(true);
           })
           .catch((err) => {
-            console.log(err);
             reject(err);
           });
       });
