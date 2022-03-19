@@ -1,5 +1,5 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
+import {createApp} from "vue";
+import {createPinia} from "pinia";
 import PrimeVue from "primevue/config";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
@@ -11,6 +11,8 @@ import BadgeDirective from 'primevue/badgedirective';
 
 import App from "./App.vue";
 import router from "./router";
+import Dialog from "primevue/dialog";
+import Listbox from "primevue/listbox";
 
 const app = createApp(App);
 
@@ -25,6 +27,8 @@ app.component("Checkbox", Checkbox);
 app.component("Button", Button);
 app.component("Menubar", Menubar);
 app.component("PanelMenu", PanelMenu);
-app.component("Divider",Divider);
+app.component("Divider", Divider);
+app.component("Dialog", Dialog);
+app.component("Listbox", Listbox);
 
 app.mount("#app");
