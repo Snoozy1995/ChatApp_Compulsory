@@ -4,5 +4,5 @@ export class CreateRoomDto {
     @ApiProperty()
     name: string;
     @ApiProperty()
-    authorId: number;
+    authorId: string;
 }

@@ -39,7 +39,7 @@ export class RoomsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.roomsService.findOne(+id);
+    return this.roomsService.findOne(id);
   }
 
   @Patch(':id')

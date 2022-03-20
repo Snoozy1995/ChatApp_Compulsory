@@ -16,7 +16,7 @@
             severity="info"
             v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"
           ></Tag>
-          {{ chat.user.name }}: {{ chat.text }}
+          <b>{{ chat.user.name }}</b>: {{ chat.text }}
           <Divider style="margin: 5px"></Divider>
         </li>
       </ul>
@@ -46,9 +46,6 @@ const inputText = ref("");
 
 const chatStore = ChatStore();
 const userStore = UserStore();
-//const txtChatInput = ref("");
-//const txtRoomInput = ref("");
-//const txtRoomListener = ref("");
 chatStore.$subscribe((obj,state) => {
   items[0].label = "Room: "+state.room+" (Leave room)";
 });
@@ -87,22 +84,8 @@ function onEnter() {
   }
   chatStore.sendMessage(inputText.value);
   inputText.value = "";
+
 }
-/*
-
-function listenToRoom() {
-  chatStore.setRoom(txtRoomListener.value, userStore.loggedInUser);
-}
-
-function sendChat() {
-  chatStore.createChat({
-    text: txtChatInput.value,
-    room: txtRoomInput.value,
-    user: userStore.loggedInUser,
-  });
-}*/
-
-//chatStore.setRoom("default",userStore.loggedInUser);
 </script>
 
 <style scoped></style>

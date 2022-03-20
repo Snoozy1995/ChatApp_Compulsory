@@ -5,7 +5,7 @@ export interface IRoomRepository {
 
     findById(query: string): Promise<Room>;
 
-    create(name: string, authorId: number): Promise<Room>;
+    create(name: string, authorId: string): Promise<Room>;
 
     getRoom(name: string, authorId: string): Promise<Room>;
 

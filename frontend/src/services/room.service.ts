@@ -1,4 +1,5 @@
 import axios from "axios";
+import type {Room} from "@/models/Room";
 
 export class RoomService {
     http = axios.create({
@@ -12,12 +13,12 @@ export class RoomService {
         return this.http.get("/rooms/userId/"+id);
     }
 
-    findAll() {
-        return this.http.get("/rooms");
+    findAll():Promise<Room[]>  {
+        return this.http.get("/rooms/");
     }
 
-    async createRoom(name: string): Promise<any> {
-        const result = await this.http.post<any>("/rooms", {name: name, authorId: 1});
+    async createRoom(name: string, authorId: string): Promise<Room> {
+        const result = await this.http.post<any>("/rooms", {name, authorId});
         return result.data;
     }
 

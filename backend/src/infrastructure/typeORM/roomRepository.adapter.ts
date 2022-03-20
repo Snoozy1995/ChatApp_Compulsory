@@ -13,7 +13,7 @@ export class RoomRepositoryAdapter implements IRoomRepository {
     }
 
     getAllRooms(): Promise<Room[]> {
-        throw new Error("Method not implemented.");
+        return this.roomRepo.find();
     }
     removeRoom(roomToRemove: Room): Promise<Room> {
         throw new Error("Method not implemented.");
@@ -23,7 +23,7 @@ export class RoomRepositoryAdapter implements IRoomRepository {
         return this.roomRepo.find({
             where: {
                 name: Like(`%${query}%`),
-            }, select: ['name', 'id']
+            }, select: ['name', 'uuid']
         });
     }
 
@@ -35,11 +35,11 @@ export class RoomRepositoryAdapter implements IRoomRepository {
         return this.roomRepo.findOne({
             where: {
                 uuid: query,
-            }, select: ['name', 'id'],
+            }, select: ['name', 'uuid'],
         });
     }
 
-    create(name: string, authorId: number): Promise<Room> {
+    create(name: string, authorId: string): Promise<Room> {
         return this.roomRepo.save({name: name, authorId: authorId});
     }
 

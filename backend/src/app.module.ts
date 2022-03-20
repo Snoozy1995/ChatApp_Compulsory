@@ -11,8 +11,8 @@ import { RoomsModule} from "./rooms/rooms.module";
       type: 'sqlite',
       database: './database/giga.db',
       autoLoadEntities: true,
+      logging: true,
       synchronize: true,
-
     }),
     UsersModule,
     ChatsModule,

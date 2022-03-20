@@ -1,11 +1,11 @@
-import { EntitySchema } from 'typeorm';
+import {EntitySchema} from 'typeorm';
 import {Room} from "../../core/room.entity";
 
 export const RoomSchema = new EntitySchema<Room>({
     name: 'Room',
     target: Room,
     columns: {
-        id: {
+        uuid: {
             type: 'uuid',
             generated: 'uuid',
             primary: true,
@@ -14,9 +14,8 @@ export const RoomSchema = new EntitySchema<Room>({
             type: 'varchar',
         },
         authorId: {
-            type: 'integer',
+            type: 'varchar',
         },
     },
-    relations: {
-    },
+    relations: {},
 });

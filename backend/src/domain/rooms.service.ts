@@ -19,7 +19,7 @@ export class RoomsService {
   constructor(private readonly roomRepository: IRoomRepository ) {
   }
 
-  async create(name: string, authorId: number) {
+  async create(name: string, authorId: string) {
     return await this.roomRepository
         .create(name, authorId)
         .catch((error) => console.log(error.code + ' ' + error.message));
@@ -29,7 +29,7 @@ export class RoomsService {
     return await this.roomRepository.getAllRooms();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} room`;
   }
 
