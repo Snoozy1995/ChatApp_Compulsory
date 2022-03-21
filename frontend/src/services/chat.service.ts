@@ -1,4 +1,3 @@
-import { io } from "socket.io-client";
 import type { Chat } from "@/models/Chat";
 import type { User } from "@/models/User";
 import socketHelper from "../helpers/socket.helper";

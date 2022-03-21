@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
 import { UserStore } from "@/stores/userStore";
 import TabMenu from "primevue/tabmenu";
 
