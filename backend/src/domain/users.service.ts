@@ -2,7 +2,7 @@ import { IUserRepository } from './borders/userRepository.interface';
 import { User } from '../core/user.entity';
 
 export class UsersService {
-  constructor(private readonly userRepository: IUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository ) {}
 
   create(name: string, email: string, password: string): Promise<User> {
     return this.userRepository.create(name, email, password);
@@ -11,4 +11,13 @@ export class UsersService {
   login(email: string, password: string) {
     return this.userRepository.getUser(email, password);
   }
+
+  searchByUsername(query: string): Promise<User[]> {
+    return this.userRepository.searchByUsername(query);
+  }
+
+  searchByID(query: string): Promise<User>{
+    return this.userRepository.searchByID(query)
+  }
+  
 }

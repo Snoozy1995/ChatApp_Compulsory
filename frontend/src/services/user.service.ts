@@ -14,4 +14,18 @@ export class UserService {
     });
     return res.data;
   }
+  async loginUser(email: string, password: string): Promise<User> {
+    const res = await http.post<User>("/users/login", {
+      email: email,
+      password: password,
+    });
+    return res.data;
+  }
+
+  async searchUsers(query: string): Promise<User[]> {
+    const res = await http.post<User[]>("/users/search", {
+      query: query,
+    });
+    return res.data;
+  }
 }

@@ -3,6 +3,7 @@ import { UsersService } from '../domain/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from '../core/user.entity';
 import { LoginUserDto } from './dto/login-user.dto';
+import { Friend } from 'src/core/friend.entity';
 
 @Controller('users')
 export class UsersController {
@@ -22,5 +23,10 @@ export class UsersController {
   @Post('/login')
   login(@Body() loginUser: LoginUserDto): Promise<User> {
     return this.usersService.login(loginUser.email, loginUser.password);
+  }
+
+  @Post('/search')
+  searchUsers(@Body() search: { query: string }): Promise<User[]> {
+    return this.usersService.searchByUsername(search.query);
   }
 }
