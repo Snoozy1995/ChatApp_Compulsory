@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 import CreateUser from "../views/CreateUser.vue";
 import ChatView from "../views/ChatView.vue";
 import LoginView from "../views/LoginView.vue";
@@ -16,14 +15,6 @@ const router = createRouter({
         requiresLogin: true,
       },
     },
-    /*{
-      path: "/chat",
-      name: "Chat",
-      component: ChatView,
-      meta: {
-        requiresLogin: true,
-      },
-    },*/
     {
       path: "/createUser",
       name: "CreateUser",

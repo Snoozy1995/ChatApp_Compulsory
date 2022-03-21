@@ -7,7 +7,7 @@
         placeholder="Type room name to join and press enter..."
         type="text"
         class="w-full mb-3 p-inputtext-lg"
-        v-on:keyup.enter="onEnter"
+        v-on:keyup.enter="onCreate"
     />
     <Button label="Cancel" icon="pi pi-times" @click="closeCreateRoomModal" class="p-button-text"/>
     <Button label="Create" icon="pi pi-check" @click="onCreate" autofocus/>

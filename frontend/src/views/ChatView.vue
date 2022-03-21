@@ -16,7 +16,7 @@
             severity="info"
             v-bind:value="new Date(chat.timestamp).toLocaleTimeString('en-US')"
           ></Tag>
-          <b>{{ chat.user.name }}</b>: {{ chat.text }}
+          <b>&nbsp;{{ chat.user.name }}</b>: {{ chat.text }}
           <Divider style="margin: 5px"></Divider>
         </li>
       </ul>
