@@ -50,7 +50,9 @@ chatStore.$subscribe((obj,state) => {
   items[0].label = "Room: "+state.room+" (Leave room)";
 });
 
-let items = [{ label: "", command: leaveRoom }];
+
+
+let items = [{ label: "Room: "+chatStore.room+" (Leave room)", command: leaveRoom }];
 const home = { icon: "pi pi-home", command: leaveRoom };
 
 var typing = false;
